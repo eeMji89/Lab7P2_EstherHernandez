@@ -9,13 +9,13 @@ import java.awt.Color;
  */
 public class disparo extends Plantas {
     private String proyectil;
-    private Color color;
+    private String color;
 
     public disparo() {
         super();
     }
 
-    public disparo(String proyectil, Color color, String rango, String nombre, double ataque, double vida) {
+    public disparo(String proyectil, String color, String rango, String nombre, double ataque, double vida) {
         super(rango, nombre, ataque, vida);
         this.proyectil = proyectil;
         this.color = color;
@@ -30,11 +30,11 @@ public class disparo extends Plantas {
         this.proyectil = proyectil;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 

@@ -45,10 +45,11 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="12" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel23" min="-2" pref="21" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" min="-2" pref="362" max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" min="-2" pref="387" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -226,14 +227,14 @@
                                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jLabel11" min="-2" pref="43" max="-2" attributes="0"/>
-                                          <Component id="jpcolor" pref="102" max="32767" attributes="0"/>
                                           <Component id="jpdureza" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jpcolor" alignment="0" pref="102" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -277,7 +278,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jpex" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jppro" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jpcolor" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="jpcolor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -291,7 +292,7 @@
                           <Component id="jppeso" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jpdureza" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="49" max="32767" attributes="0"/>
+                      <EmptySpace pref="74" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -417,14 +418,14 @@
                 <Property name="text" type="java.lang.String" value="Color"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jpcolor">
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dureza"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jpdureza">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jpcolor">
             </Component>
           </SubComponents>
         </Container>
@@ -562,7 +563,7 @@
                               <Component id="jScrollPane2" min="-2" pref="158" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="19" max="32767" attributes="0"/>
+                      <EmptySpace pref="44" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

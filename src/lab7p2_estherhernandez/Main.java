@@ -5,6 +5,7 @@
 package lab7p2_estherhernandez;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -65,9 +66,9 @@ public class Main extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jpcrear = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jpcolor = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jpdureza = new javax.swing.JTextField();
+        jpcolor = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -248,9 +249,9 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(32, 32, 32)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jpcolor, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                                    .addComponent(jpdureza))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jpdureza)
+                                    .addComponent(jpcolor, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))))))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,7 +288,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jpex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jppro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpcolor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpcolor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -298,7 +299,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jpaltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jppeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jpdureza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Plantas", jPanel2);
@@ -443,7 +444,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Zombies", jPanel3);
@@ -467,10 +468,11 @@ public class Main extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -483,6 +485,9 @@ public class Main extends javax.swing.JFrame {
     private void jpcrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpcrearMouseClicked
         // TODO add your handling code here:
         String rango; String tipo;
+        Double ataque,vida;
+        ataque = Double.parseDouble(jpataque.getText());
+        vida = Double.parseDouble(jpvida.getText());
         if(jprango1.isSelected()){
             rango = "Bajo";
         }
@@ -504,15 +509,22 @@ public class Main extends javax.swing.JFrame {
         }
         
         if (tipo.equalsIgnoreCase("Explosiva")) {
-            
+         int ex = Integer.parseInt(jpex.getText());
+         plantas.add(new explosiva(ex,rango,jpnombre.getText(),ataque,vida));
         }
         
         else if(tipo.equalsIgnoreCase("Disparo")){
-            
+         plantas.add(new disparo(jppro.getText(),jpcolor.getText(),jpnombre.getText(),rango,ataque,vida));
         }
         else if(tipo.equalsIgnoreCase("Defensa")){
+            int nivel,altura,peso;
+            nivel = Integer.parseInt(jpdureza.getText());
+            altura = Integer.parseInt(jpaltura.getText());
+            peso = Integer.parseInt(jppeso.getText());
             
+         plantas.add(new Defensa(altura,nivel,peso,rango,jpnombre.getText(),ataque,vida));
         }
+        JOptionPane.showMessageDialog(this, "Planta Agregada exitosamente");
         
     }//GEN-LAST:event_jpcrearMouseClicked
 
@@ -528,6 +540,27 @@ public class Main extends javax.swing.JFrame {
         DefaultMutableTreeNode clasico = new DefaultMutableTreeNode("Clasico");
         DefaultMutableTreeNode cargado = new DefaultMutableTreeNode("Cargado");
        
+        
+        for (int i = 0; i < plantas.size(); i++) {
+            if (plantas.get(i) instanceof disparo) {
+                String temp1 = ((disparo)plantas.get(i)).getNombre();
+                disparo.add(new DefaultMutableTreeNode(temp1));
+            }
+            else if(plantas.get(i) instanceof explosiva){
+                String temp2 = ((explosiva)plantas.get(i)).getNombre();
+            }
+            else if(plantas.get(i) instanceof Defensa){
+                String temp3 = ((Defensa)plantas.get(i)).getNombre();
+            }
+        }
+        for (int j = 0; j < zombies.size(); j++) {
+            if (zombies.get(j) instanceof cargado) {
+                String temp4 = ((cargado)zombies.get(j)).getNombre();
+            }
+            else if (zombies.get(j) instanceof clasico) {
+                String temp4 = ((clasico)zombies.get(j)).getNombre();
+            }
+        }
         Plantas.add(defensa);
         Plantas.add(disparo);
         Plantas.add(explosion);
@@ -535,6 +568,7 @@ public class Main extends javax.swing.JFrame {
         Zombies.add(cargado);
         Entidad.add(Plantas);
         Entidad.add(Zombies);
+        modelo.reload();
     }//GEN-LAST:event_jtestMouseClicked
 
     /**
@@ -612,7 +646,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jpaltura;
     private javax.swing.JTextField jpataque;
-    private javax.swing.JButton jpcolor;
+    private javax.swing.JTextField jpcolor;
     private javax.swing.JButton jpcomida;
     private javax.swing.JButton jpcrear;
     private javax.swing.JTextField jpdureza;
