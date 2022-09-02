@@ -15,13 +15,14 @@ public class Defensa extends Plantas {
         super();
     }
 
-    public Defensa(int altura, int nivel, int peso, String nombre, double ataque, double vida, String rango) {
-        super(nombre, ataque, vida, rango);
+    public Defensa(int altura, int nivel, int peso, String rango, String nombre, double ataque, double vida) {
+        super(rango, nombre, ataque, vida);
         this.altura = altura;
         this.nivel = nivel;
         this.peso = peso;
     }
 
+   
     public int getAltura() {
         return altura;
     }

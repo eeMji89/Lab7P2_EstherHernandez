@@ -11,12 +11,14 @@ public class explosiva extends Plantas {
     public explosiva() {
         super();
     }
-    
 
-    public explosiva(int magnitud, String nombre, double ataque, double vida, String rango) {
-        super(nombre, ataque, vida, rango);
+    public explosiva(int magnitud, String rango, String nombre, double ataque, double vida) {
+        super(rango, nombre, ataque, vida);
         this.magnitud = magnitud;
     }
+    
+
+   
 
     public int getMagnitud() {
         return magnitud;

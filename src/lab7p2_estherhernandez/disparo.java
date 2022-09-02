@@ -14,13 +14,13 @@ public class disparo extends Plantas {
     public disparo() {
         super();
     }
-    
 
-    public disparo(String proyectil, Color color, String nombre, double ataque, double vida, String rango) {
-        super(nombre, ataque, vida, rango);
+    public disparo(String proyectil, Color color, String rango, String nombre, double ataque, double vida) {
+        super(rango, nombre, ataque, vida);
         this.proyectil = proyectil;
         this.color = color;
     }
+
 
     public String getProyectil() {
         return proyectil;

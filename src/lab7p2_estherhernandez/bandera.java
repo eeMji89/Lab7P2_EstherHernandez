@@ -11,19 +11,19 @@ import java.awt.Color;
  * @author ELIZABETH HERNANDEZ
  */
 public class bandera {
-    private Color color;
+    private String color;
     private String direccion;
 
-    public bandera(Color color, String direccion) {
+    public bandera(String color, String direccion) {
         this.color = color;
         this.direccion = direccion;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
