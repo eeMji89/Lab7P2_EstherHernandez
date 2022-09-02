@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -51,9 +52,32 @@ public class metodos {
 
     }
     
-    public void CargarA (){
-        
+    public void CargarP (){
+        archivo = new File("./Plantas.txt" );
+        if (archivo.exists()) {
+            Scanner sc1 = null;
+            Scanner sc2 = null;
+            try{
+               sc1 = new Scanner(archivo); 
+               sc2 = new Scanner(archivo); 
+               while (sc1.hasNext()){
+                   sc1.useDelimiter("|");
+                   sc2.useDelimiter(":");
+                   String temp = sc1.next();
+               }
+            }
+            catch(Exception e){
+                
+            }
+        } 
     }
-    
+    public void CargarZ(){
+        archivo = new File("./Zombies_.txt" );
+        if (archivo.exists()) {
+            Scanner sc1 = null;
+            Scanner sc2 = null;
+            
+        } 
+    }
 
 }
