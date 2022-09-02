@@ -5,6 +5,8 @@
 package lab7p2_estherhernandez;
 
 import java.util.ArrayList;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -34,7 +36,10 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jtreet = new javax.swing.JTree();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jtest = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jprango1 = new javax.swing.JRadioButton();
@@ -95,7 +100,18 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane1.setViewportView(jTree1);
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jtreet.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(jtreet);
+
+        jScrollPane3.setViewportView(jList2);
+
+        jtest.setText("Testear");
+        jtest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtestMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,13 +120,22 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                    .addComponent(jtest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtest))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -457,7 +482,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jpcrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpcrearMouseClicked
         // TODO add your handling code here:
-        String rango;
+        String rango; String tipo;
         if(jprango1.isSelected()){
             rango = "Bajo";
         }
@@ -468,8 +493,49 @@ public class Main extends javax.swing.JFrame {
             rango = "Alto";
         }
         
+        if (jptipo1.isSelected()) {
+            tipo = "Explosiva";
+        }
+        else if (jptipo1.isSelected()) {
+            tipo = "Disparo";
+        }
+        else{
+            tipo = "Defensa";
+        }
+        
+        if (tipo.equalsIgnoreCase("Explosiva")) {
+            
+        }
+        
+        else if(tipo.equalsIgnoreCase("Disparo")){
+            
+        }
+        else if(tipo.equalsIgnoreCase("Defensa")){
+            
+        }
         
     }//GEN-LAST:event_jpcrearMouseClicked
+
+    private void jtestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtestMouseClicked
+        // TODO add your handling code here:
+        DefaultTreeModel modelo = (DefaultTreeModel) jtreet.getModel();
+        DefaultMutableTreeNode Entidad = (DefaultMutableTreeNode) modelo.getRoot();
+        DefaultMutableTreeNode Plantas = new DefaultMutableTreeNode("Plantas");
+        DefaultMutableTreeNode Zombies = new DefaultMutableTreeNode("Zombies");
+        DefaultMutableTreeNode defensa = new DefaultMutableTreeNode("Defensa");
+        DefaultMutableTreeNode disparo = new DefaultMutableTreeNode("Disparo");
+        DefaultMutableTreeNode explosion = new DefaultMutableTreeNode("Explosion");
+        DefaultMutableTreeNode clasico = new DefaultMutableTreeNode("Clasico");
+        DefaultMutableTreeNode cargado = new DefaultMutableTreeNode("Cargado");
+       
+        Plantas.add(defensa);
+        Plantas.add(disparo);
+        Plantas.add(explosion);
+        Zombies.add(clasico);
+        Zombies.add(cargado);
+        Entidad.add(Plantas);
+        Entidad.add(Zombies);
+    }//GEN-LAST:event_jtestMouseClicked
 
     /**
      * @param args the command line arguments
@@ -536,13 +602,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTree jTree1;
     private javax.swing.JTextField jpaltura;
     private javax.swing.JTextField jpataque;
     private javax.swing.JButton jpcolor;
@@ -560,6 +627,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JRadioButton jptipo2;
     private javax.swing.JRadioButton jptipo3;
     private javax.swing.JTextField jpvida;
+    private javax.swing.JButton jtest;
+    private javax.swing.JTree jtreet;
     private javax.swing.JTextField jzataque;
     private javax.swing.JTextField jzcolor;
     private javax.swing.JTextField jzdirec;
