@@ -20,6 +20,8 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        
+        
     }
 
     /**
@@ -545,50 +547,31 @@ public class Main extends javax.swing.JFrame {
 
     private void jtestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtestMouseClicked
         // TODO add your handling code here:
-        DefaultTreeModel modelo = (DefaultTreeModel) jtreet.getModel();
-        DefaultMutableTreeNode Entidad = (DefaultMutableTreeNode) modelo.getRoot();
-        DefaultMutableTreeNode Plantas = new DefaultMutableTreeNode("Plantas");
-        DefaultMutableTreeNode Zombies = new DefaultMutableTreeNode("Zombies");
-        DefaultMutableTreeNode defensa = new DefaultMutableTreeNode("Defensa");
-        DefaultMutableTreeNode disparo = new DefaultMutableTreeNode("Disparo");
-        DefaultMutableTreeNode explosion = new DefaultMutableTreeNode("Explosion");
-        DefaultMutableTreeNode clasico = new DefaultMutableTreeNode("Clasico");
-        DefaultMutableTreeNode cargado = new DefaultMutableTreeNode("Cargado");
-       
         
-        for (int i = 0; i < plantas.size(); i++) {
-            if (plantas.get(i) instanceof disparo) {
-                String temp1 = ((disparo)plantas.get(i)).getNombre();
-                disparo.add(new DefaultMutableTreeNode(temp1));
-            }
-            else if(plantas.get(i) instanceof explosiva){
-                String temp2 = ((explosiva)plantas.get(i)).getNombre();
-            }
-            else if(plantas.get(i) instanceof Defensa){
-                String temp3 = ((Defensa)plantas.get(i)).getNombre();
-            }
-        }
-        for (int j = 0; j < zombies.size(); j++) {
-            if (zombies.get(j) instanceof cargado) {
-                String temp4 = ((cargado)zombies.get(j)).getNombre();
-            }
-            else if (zombies.get(j) instanceof clasico) {
-                String temp4 = ((clasico)zombies.get(j)).getNombre();
-            }
-        }
-        Plantas.add(defensa);
-        Plantas.add(disparo);
-        Plantas.add(explosion);
-        Zombies.add(clasico);
-        Zombies.add(cargado);
-        Entidad.add(Plantas);
-        Entidad.add(Zombies);
-        modelo.reload();
     }//GEN-LAST:event_jtestMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        
+        Double ataque,vida;
+        String tipo="";
+        ataque = Double.parseDouble(jzataque.getText());
+        vida = Double.parseDouble(jzvida.getText());
+        if (jztipo1.isSelected()) {
+            tipo = "Clasico";
+        }
+        else if(jztipo2.isSelected()){
+            tipo  = "Cargado";
+;        }
+        if (tipo.equalsIgnoreCase("Clasico")) {
+            int ex = Integer.parseInt(jzexp.getText());
+            zombies.add(new clasico(ex,new bandera(jzcolor.getText(),jzdirec.getText()),jznombre.getText(),ataque,vida));
+        }
+        else if(tipo.equalsIgnoreCase("Cargado")){
+            int tam = Integer.parseInt(jztam.getText());
+            int edad = Integer.parseInt(jzedad.getText());
+            int nivel = Integer.parseInt(jzenojo.getText());
+            zombies.add(new cargado(tam,nivel,edad,jznombre.getText(),ataque,vida));
+        }
         
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -629,6 +612,48 @@ public class Main extends javax.swing.JFrame {
                 new Main().setVisible(true);
             }
         });
+    }
+    public void Arbol(){
+        DefaultTreeModel modelo = (DefaultTreeModel) jtreet.getModel();
+        DefaultMutableTreeNode Entidad = (DefaultMutableTreeNode) modelo.getRoot();
+        DefaultMutableTreeNode Plantas = new DefaultMutableTreeNode("Plantas");
+        DefaultMutableTreeNode Zombies = new DefaultMutableTreeNode("Zombies");
+        DefaultMutableTreeNode defensa = new DefaultMutableTreeNode("Defensa");
+        DefaultMutableTreeNode disparo = new DefaultMutableTreeNode("Disparo");
+        DefaultMutableTreeNode explosion = new DefaultMutableTreeNode("Explosion");
+        DefaultMutableTreeNode clasico = new DefaultMutableTreeNode("Clasico");
+        DefaultMutableTreeNode cargado = new DefaultMutableTreeNode("Cargado");
+       
+        
+        for (int i = 0; i < plantas.size(); i++) {
+            if (plantas.get(i) instanceof disparo) {
+                String temp1 = ((disparo)plantas.get(i)).getNombre();
+                disparo.add(new DefaultMutableTreeNode(temp1));
+            }
+            else if(plantas.get(i) instanceof explosiva){
+                String temp2 = ((explosiva)plantas.get(i)).getNombre();
+            }
+            else if(plantas.get(i) instanceof Defensa){
+                String temp3 = ((Defensa)plantas.get(i)).getNombre();
+            }
+        }
+        for (int j = 0; j < zombies.size(); j++) {
+            if (zombies.get(j) instanceof cargado) {
+                String temp4 = ((cargado)zombies.get(j)).getNombre();
+            }
+            else if (zombies.get(j) instanceof clasico) {
+                String temp4 = ((clasico)zombies.get(j)).getNombre();
+            }
+        }
+        Plantas.add(defensa);
+        Plantas.add(disparo);
+        Plantas.add(explosion);
+        Zombies.add(clasico);
+        Zombies.add(cargado);
+        Entidad.add(Plantas);
+        Entidad.add(Zombies);
+        modelo.reload();
+        
     }
     ArrayList<Plantas> plantas = new ArrayList();
     ArrayList <Zombies> zombies = new ArrayList();

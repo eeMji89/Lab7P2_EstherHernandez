@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package lab7p2_estherhernandez;
 
 import java.util.ArrayList;
@@ -13,6 +10,7 @@ import java.util.ArrayList;
 public class cargado extends Zombies {
     private int tam;
     private int enojo;
+    private int edad;
     private ArrayList<String> personas = new ArrayList();
 
     public cargado() {
@@ -20,10 +18,11 @@ public class cargado extends Zombies {
     }
 
     
-    public cargado(int tam, int enojo, String nombre, double ataque, double vida) {
+    public cargado(int tam, int enojo,int edad, String nombre, double ataque, double vida) {
         super(nombre, ataque, vida);
         this.tam = tam;
         this.enojo = enojo;
+        this.edad = edad;
     }
 
     public int getTam() {
@@ -46,6 +45,14 @@ public class cargado extends Zombies {
         return personas;
     }
 
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+    
     public void setPersonas(ArrayList<String> personas) {
         this.personas = personas;
     }

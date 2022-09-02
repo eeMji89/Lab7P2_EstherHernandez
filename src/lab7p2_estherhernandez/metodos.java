@@ -1,7 +1,9 @@
 
 package lab7p2_estherhernandez;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +18,7 @@ public class metodos {
     private File archivo;
     private ArrayList<Plantas> plantas = new ArrayList();
     private ArrayList<Zombies> zombies = new ArrayList();
-
+   
     public metodos() {
         
     }
@@ -32,7 +34,7 @@ public class metodos {
     public ArrayList<Plantas> getPlantas() {
         return plantas;
     }
-
+ 
     public void setPlantas(ArrayList<Plantas> plantas) {
         this.plantas = plantas;
     }
@@ -51,6 +53,9 @@ public class metodos {
         
 
     }
+    private String leer(String ruta) throws FileNotFoundException, IOException{
+       return new BufferedReader(new FileReader (ruta)).readLine();
+    }
     
     public void CargarP (){
         archivo = new File("./Plantas.txt" );
@@ -58,13 +63,21 @@ public class metodos {
             Scanner sc1 = null;
             Scanner sc2 = null;
             try{
-               sc1 = new Scanner(archivo); 
-               sc2 = new Scanner(archivo); 
+                String p = leer("./Plantas.txt");
+                String z = leer("./Zombies_.txt");
+                String[] temp = p.split("|");
+                for (int i = 0; i < temp.length; i++) {
+                    String t= temp [i];
+                    String[]temp2 = t.split(t);
+                    
+                }
+               /* sc1 = new Scanner(p); 
+               sc2 = new Scanner(z); 
                while (sc1.hasNext()){
                    sc1.useDelimiter("|");
                    sc2.useDelimiter(":");
                    String temp = sc1.next();
-               }
+               }*/
             }
             catch(Exception e){
                 
