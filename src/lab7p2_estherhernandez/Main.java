@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package lab7p2_estherhernandez;
 
 import java.util.ArrayList;
@@ -21,7 +18,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         
-        
+        Arbol();
     }
 
     /**
@@ -36,8 +33,10 @@ public class Main extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
-        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jp1 = new javax.swing.JPopupMenu();
         Eliminar = new javax.swing.JMenuItem();
+        Imprimir = new javax.swing.JMenuItem();
+        Elegir = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -109,12 +108,23 @@ public class Main extends javax.swing.JFrame {
                 EliminarActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(Eliminar);
+        jp1.add(Eliminar);
+
+        Imprimir.setText("jMenuItem1");
+        jp1.add(Imprimir);
+
+        Elegir.setText("jMenuItem1");
+        jp1.add(Elegir);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("ENTIDADES");
         jtreet.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jtreet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtreetMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtreet);
 
         jScrollPane3.setViewportView(jList2);
@@ -543,6 +553,8 @@ public class Main extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "Planta Agregada exitosamente");
         
+        
+        
     }//GEN-LAST:event_jpcrearMouseClicked
 
     private void jtestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtestMouseClicked
@@ -573,11 +585,19 @@ public class Main extends javax.swing.JFrame {
             zombies.add(new cargado(tam,nivel,edad,jznombre.getText(),ataque,vida));
         }
         
+        
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EliminarActionPerformed
+
+    private void jtreetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtreetMouseClicked
+        // TODO add your handling code here:
+        
+        jp1.setVisible(true);
+        
+    }//GEN-LAST:event_jtreetMouseClicked
 
     /**
      * @param args the command line arguments
@@ -623,31 +643,73 @@ public class Main extends javax.swing.JFrame {
         DefaultMutableTreeNode explosion = new DefaultMutableTreeNode("Explosion");
         DefaultMutableTreeNode clasico = new DefaultMutableTreeNode("Clasico");
         DefaultMutableTreeNode cargado = new DefaultMutableTreeNode("Cargado");
-       
+       DefaultMutableTreeNode alto = new DefaultMutableTreeNode("Alto");
+       DefaultMutableTreeNode medio = new DefaultMutableTreeNode("Medio");
+       DefaultMutableTreeNode bajo = new DefaultMutableTreeNode("Bajo");
         
         for (int i = 0; i < plantas.size(); i++) {
             if (plantas.get(i) instanceof disparo) {
-                String temp1 = ((disparo)plantas.get(i)).getNombre();
-                disparo.add(new DefaultMutableTreeNode(temp1));
+                if (((disparo)plantas.get(i)).getRango().equalsIgnoreCase("alto")) {
+                    String temp1 = ((disparo)plantas.get(i)).toString();
+                alto.add(new DefaultMutableTreeNode(temp1));
+                }
+                else if (((disparo)plantas.get(i)).getRango().equalsIgnoreCase("medio")) {
+                    String temp1 = ((disparo)plantas.get(i)).toString();
+                medio.add(new DefaultMutableTreeNode(temp1));
+                }
+                else if (((disparo)plantas.get(i)).getRango().equalsIgnoreCase("bajo")) {
+                    String temp1 = ((disparo)plantas.get(i)).toString();
+                bajo.add(new DefaultMutableTreeNode(temp1));
+                }
+                
             }
+            
             else if(plantas.get(i) instanceof explosiva){
-                String temp2 = ((explosiva)plantas.get(i)).getNombre();
+            if (((explosiva)plantas.get(i)).getRango().equalsIgnoreCase("alto")) {
+                String temp2 = ((explosiva)plantas.get(i)).toString();
+                alto.add(new DefaultMutableTreeNode(temp2));
+            }
+            if (((explosiva)plantas.get(i)).getRango().equalsIgnoreCase("medio")) {
+                String temp2 = ((explosiva)plantas.get(i)).toString();
+                medio.add(new DefaultMutableTreeNode(temp2));
+            }
+            
+            if (((explosiva)plantas.get(i)).getRango().equalsIgnoreCase("bajo")) {
+                String temp2 = ((explosiva)plantas.get(i)).toString();
+                  bajo.add(new DefaultMutableTreeNode(temp2));
+            }
             }
             else if(plantas.get(i) instanceof Defensa){
-                String temp3 = ((Defensa)plantas.get(i)).getNombre();
+                if (((Defensa)plantas.get(i)).getRango().equalsIgnoreCase("alto")) {
+                String temp3 = ((Defensa)plantas.get(i)).toString();
+                 alto.add(new DefaultMutableTreeNode(temp3));
+                }
+                if (((Defensa)plantas.get(i)).getRango().equalsIgnoreCase("medio")) {
+                String temp3 = ((Defensa)plantas.get(i)).toString();
+                 medio.add(new DefaultMutableTreeNode(temp3));
+                }
+                if (((Defensa)plantas.get(i)).getRango().equalsIgnoreCase("bajo")) {
+                String temp3 = ((Defensa)plantas.get(i)).toString();
+                 bajo.add(new DefaultMutableTreeNode(temp3));
+                }
             }
         }
         for (int j = 0; j < zombies.size(); j++) {
             if (zombies.get(j) instanceof cargado) {
-                String temp4 = ((cargado)zombies.get(j)).getNombre();
+                String temp4 = ((cargado)zombies.get(j)).toString();
             }
             else if (zombies.get(j) instanceof clasico) {
-                String temp4 = ((clasico)zombies.get(j)).getNombre();
+                String temp4 = ((clasico)zombies.get(j)).toString();
             }
         }
+        defensa.add(alto);
+        defensa.add(bajo);
+        defensa.add(medio);
+        
         Plantas.add(defensa);
         Plantas.add(disparo);
         Plantas.add(explosion);
+        
         Zombies.add(clasico);
         Zombies.add(cargado);
         Entidad.add(Plantas);
@@ -658,7 +720,9 @@ public class Main extends javax.swing.JFrame {
     ArrayList<Plantas> plantas = new ArrayList();
     ArrayList <Zombies> zombies = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Elegir;
     private javax.swing.JMenuItem Eliminar;
+    private javax.swing.JMenuItem Imprimir;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -691,11 +755,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPopupMenu jp1;
     private javax.swing.JTextField jpaltura;
     private javax.swing.JTextField jpataque;
     private javax.swing.JTextField jpcolor;

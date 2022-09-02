@@ -64,11 +64,14 @@ public class metodos {
             Scanner sc2 = null;
             try{
                 String p = leer("./Plantas.txt");
-                String z = leer("./Zombies_.txt");
+                
                 String[] temp = p.split("|");
                 for (int i = 0; i < temp.length; i++) {
                     String t= temp [i];
-                    String[]temp2 = t.split(t);
+                    String[]temp2 = t.split(",");
+                    for (int j = 0; j < temp2.length; j++) {
+                        
+                    }
                     
                 }
                /* sc1 = new Scanner(p); 
@@ -84,8 +87,9 @@ public class metodos {
             }
         } 
     }
-    public void CargarZ(){
+    public void CargarZ() throws IOException{
         archivo = new File("./Zombies_.txt" );
+        String z = leer("./Zombies_.txt");
         if (archivo.exists()) {
             Scanner sc1 = null;
             Scanner sc2 = null;
