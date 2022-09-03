@@ -52,7 +52,7 @@ public class metodos {
         FileWriter fw = null;
         BufferedWriter bw = null;
         try {
-            fw = new FileWriter(archivo, false);
+            fw = new FileWriter("./Plantas.txt", false);
             bw = new BufferedWriter(fw);
             String tipo= "";
             for (Plantas p : plantas) {
@@ -61,12 +61,12 @@ public class metodos {
                     
                 }
                 else if ( p instanceof Defensa) {
-                    bw.write(tipo+": ("+((Defensa) p).getAltura()+","+((Defensa) p).getNivel()+")_");
+                    bw.write(tipo+": ("+((Defensa) p).getAltura()+","+((Defensa) p).getNivel()+","+((Defensa) p).getPeso() +")_");
                 }
                 else if ( p instanceof explosiva ) {
-                    .
+                    bw.write(tipo+": ("+((explosiva)p).getMagnitud()+")_");
                 }
-                bw.write("Nombre =" +p.getNombre()+","+"");
+                bw.write("Rango="+p.getRango()+","+"Nombre =" +p.getNombre()+","+"Ataque="+ p.getAtaque()+",Vida="+p.getVida());
                 
             }
         } catch (Exception e) {
