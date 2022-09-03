@@ -16,7 +16,7 @@
       <SubComponents>
         <MenuItem class="javax.swing.JMenuItem" name="Eliminar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="E"/>
+            <Property name="text" type="java.lang.String" value="Eliminar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarActionPerformed"/>
@@ -24,12 +24,12 @@
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="Imprimir">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+            <Property name="text" type="java.lang.String" value="Imprimir"/>
           </Properties>
         </MenuItem>
         <MenuItem class="javax.swing.JMenuItem" name="Elegir">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+            <Property name="text" type="java.lang.String" value="Elegir"/>
           </Properties>
         </MenuItem>
       </SubComponents>

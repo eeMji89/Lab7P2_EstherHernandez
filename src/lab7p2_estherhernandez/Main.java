@@ -17,7 +17,8 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        
+        metodos m = new metodos();
+        m.CargarP();
         Arbol();
     }
 
@@ -102,7 +103,7 @@ public class Main extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         jLabel23 = new javax.swing.JLabel();
 
-        Eliminar.setText("E");
+        Eliminar.setText("Eliminar");
         Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EliminarActionPerformed(evt);
@@ -110,10 +111,10 @@ public class Main extends javax.swing.JFrame {
         });
         jp1.add(Eliminar);
 
-        Imprimir.setText("jMenuItem1");
+        Imprimir.setText("Imprimir");
         jp1.add(Imprimir);
 
-        Elegir.setText("jMenuItem1");
+        Elegir.setText("Elegir");
         jp1.add(Elegir);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -551,6 +552,8 @@ public class Main extends javax.swing.JFrame {
             
          plantas.add(new Defensa(altura,nivel,peso,rango,jpnombre.getText(),ataque,vida));
         }
+        DefaultTreeModel modelo = (DefaultTreeModel) jtreet.getModel();
+        modelo.reload();
         JOptionPane.showMessageDialog(this, "Planta Agregada exitosamente");
         
         
@@ -594,8 +597,26 @@ public class Main extends javax.swing.JFrame {
 
     private void jtreetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtreetMouseClicked
         // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            //seleccionar un nodo con click derecho
+            int row = jtreet.getClosestRowForLocation(
+                    evt.getX(), evt.getY());
+            jtreet.setSelectionRow(row);
+            Object v1
+                    = jtreet.getSelectionPath().
+                    getLastPathComponent();
+            DefaultMutableTreeNode nodo_seleccionado = (DefaultMutableTreeNode) v1;
+            if (nodo_seleccionado.getUserObject() instanceof Plantas) {
+                planta_s
+                        = (Plantas) nodo_seleccionado.
+                        getUserObject();
+                jp1.show(evt.getComponent(),
+                        evt.getX(), evt.getY());
+            }
+
+        }
         
-        jp1.setVisible(true);
+       // jp1.setVisible(true);
         
     }//GEN-LAST:event_jtreetMouseClicked
 
@@ -646,20 +667,28 @@ public class Main extends javax.swing.JFrame {
        DefaultMutableTreeNode alto = new DefaultMutableTreeNode("Alto");
        DefaultMutableTreeNode medio = new DefaultMutableTreeNode("Medio");
        DefaultMutableTreeNode bajo = new DefaultMutableTreeNode("Bajo");
-        
+         defensa.add(alto);
+        defensa.add(bajo);
+        defensa.add(medio);
+        explosion.add(alto);
+        explosion.add(bajo);
+        explosion.add(medio);
+        disparo.add(alto);
+        disparo.add(bajo);
+        disparo.add(medio);
         for (int i = 0; i < plantas.size(); i++) {
             if (plantas.get(i) instanceof disparo) {
                 if (((disparo)plantas.get(i)).getRango().equalsIgnoreCase("alto")) {
                     String temp1 = ((disparo)plantas.get(i)).toString();
-                alto.add(new DefaultMutableTreeNode(temp1));
+               ((DefaultMutableTreeNode)defensa.getChildAt(0)).add(new DefaultMutableTreeNode(temp1));
                 }
                 else if (((disparo)plantas.get(i)).getRango().equalsIgnoreCase("medio")) {
                     String temp1 = ((disparo)plantas.get(i)).toString();
-                medio.add(new DefaultMutableTreeNode(temp1));
+               ((DefaultMutableTreeNode)defensa.getChildAt(1)).add(new DefaultMutableTreeNode(temp1));
                 }
                 else if (((disparo)plantas.get(i)).getRango().equalsIgnoreCase("bajo")) {
                     String temp1 = ((disparo)plantas.get(i)).toString();
-                bajo.add(new DefaultMutableTreeNode(temp1));
+                ((DefaultMutableTreeNode)defensa.getChildAt(2)).add(new DefaultMutableTreeNode(temp1));
                 }
                 
             }
@@ -702,9 +731,7 @@ public class Main extends javax.swing.JFrame {
                 String temp4 = ((clasico)zombies.get(j)).toString();
             }
         }
-        defensa.add(alto);
-        defensa.add(bajo);
-        defensa.add(medio);
+       
         
         Plantas.add(defensa);
         Plantas.add(disparo);
@@ -719,6 +746,9 @@ public class Main extends javax.swing.JFrame {
     }
     ArrayList<Plantas> plantas = new ArrayList();
     ArrayList <Zombies> zombies = new ArrayList();
+    Plantas planta_s;
+    Zombies zombies_s;
+    DefaultMutableTreeNode nodo_seleccionado;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Elegir;
     private javax.swing.JMenuItem Eliminar;

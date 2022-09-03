@@ -51,6 +51,7 @@ public class metodos {
         FileWriter fw = null;
         FileReader fr = null;
         
+        
 
     }
     private String leer(String ruta) throws FileNotFoundException, IOException{
@@ -64,16 +65,43 @@ public class metodos {
             Scanner sc2 = null;
             try{
                 String p = leer("./Plantas.txt");
-                
-                String[] temp = p.split("|");
+                Plantas pt;
+                String[] temp = p.split("\\|");
                 for (int i = 0; i < temp.length; i++) {
                     String t= temp [i];
                     String[]temp2 = t.split(",");
-                    for (int j = 0; j < temp2.length; j++) {
+                        
+                    for (int j = 0; j < temp2.length; j++) { 
+                        if (temp2[j].contains("_")) {
+                            String [] temp3 = temp[i].split("_");
+                        }
+                        else{
+                            String [] temp4 = temp2[i].split("=");
+                            if (temp4[0].equalsIgnoreCase("Nombre")){
+                                String nombrept= temp4[1];
+                                
+                            }
+                            else if (temp4[0].equalsIgnoreCase("")){
+                                
+                                
+                            }
+                        }
+                        
+                        
+                        for (int k = 0; k < temp3[i].length(); k++) {
+                            
+                        }
+                        if (temp3[0].equals("Nombre")){
+                            
+                        }
+                        else{
+                        }
+                        
                         
                     }
                     
                 }
+            
                /* sc1 = new Scanner(p); 
                sc2 = new Scanner(z); 
                while (sc1.hasNext()){
