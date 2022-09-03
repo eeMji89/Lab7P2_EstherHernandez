@@ -2,6 +2,7 @@
 package lab7p2_estherhernandez;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -49,8 +50,28 @@ public class metodos {
     
     public void EscribirA ()throws IOException {
         FileWriter fw = null;
-        FileReader fr = null;
-        
+        BufferedWriter bw = null;
+        try {
+            fw = new FileWriter(archivo, false);
+            bw = new BufferedWriter(fw);
+            String tipo= "";
+            for (Plantas p : plantas) {
+                if ( p instanceof disparo) {
+                    bw.write(tipo+": ("+((disparo) p).getProyectil()+","+((disparo) p).getColor()+")_");
+                    
+                }
+                else if ( p instanceof Defensa) {
+                    bw.write(tipo+": ("+((Defensa) p).getAltura()+","+((Defensa) p).getNivel()+")_");
+                }
+                else if ( p instanceof explosiva ) {
+                    .
+                }
+                bw.write("Nombre =" +p.getNombre()+","+"");
+                
+            }
+        } catch (Exception e) {
+            
+        }
         
 
     }
@@ -66,6 +87,8 @@ public class metodos {
             try{
                 String p = leer("./Plantas.txt");
                 Plantas pt;
+                double ataque=0,vida = 0;
+                String tipop = "";String nombrept="";String rangot="";
                 String[] temp = p.split("\\|");
                 for (int i = 0; i < temp.length; i++) {
                     String t= temp [i];
@@ -73,31 +96,40 @@ public class metodos {
                         
                     for (int j = 0; j < temp2.length; j++) { 
                         if (temp2[j].contains("_")) {
-                            String [] temp3 = temp[i].split("_");
+                            String [] temp3 = temp2[i].split("_");
+                            if (temp3[0].contains(":")) {
+                               String[]x1 =  temp3[0].split(":");
+                               tipop = x1[0];
+                            }
+                            else if(temp3[1].contains(":")){
+                                
+                            }
                         }
                         else{
                             String [] temp4 = temp2[i].split("=");
                             if (temp4[0].equalsIgnoreCase("Nombre")){
-                                String nombrept= temp4[1];
+                                nombrept= temp4[1];
+                            }
+                            else if (temp4[0].equalsIgnoreCase("Ataque")){
+                                  
+                            }
+                             else if (temp4[0].equalsIgnoreCase("Vida")){
+                                
                                 
                             }
-                            else if (temp4[0].equalsIgnoreCase("")){
-                                
+                             else if (temp4[0].equalsIgnoreCase("Rango")){
+                                rangot= temp[1];
                                 
                             }
-                        }
-                        
-                        
-                        for (int k = 0; k < temp3[i].length(); k++) {
                             
                         }
-                        if (temp3[0].equals("Nombre")){
-                            
-                        }
-                        else{
-                        }
-                        
-                        
+   
+                    }
+                    if (tipop.equalsIgnoreCase("disparo")) {
+                        plantas.add(new disparo());
+                    }
+                    else  if (tipop.equalsIgnoreCase("defensa")) {
+                        plantas.add(new Defensa());
                     }
                     
                 }
