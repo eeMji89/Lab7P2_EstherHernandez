@@ -1,7 +1,10 @@
 
 package lab7p2_estherhernandez;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -15,10 +18,11 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-    public Main() {
+    public Main() throws IOException {
         initComponents();
-        metodos m = new metodos();
+        
         m.CargarP();
+        m.EscribirAP();
         Arbol();
     }
 
@@ -512,6 +516,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jpcrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpcrearMouseClicked
         // TODO add your handling code here:
+        m.CargarP();
         String rango; String tipo;
         Double ataque,vida;
         ataque = Double.parseDouble(jpataque.getText());
@@ -555,7 +560,11 @@ public class Main extends javax.swing.JFrame {
         DefaultTreeModel modelo = (DefaultTreeModel) jtreet.getModel();
         modelo.reload();
         JOptionPane.showMessageDialog(this, "Planta Agregada exitosamente");
-        
+        try {
+            m.EscribirAP();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
     }//GEN-LAST:event_jpcrearMouseClicked
@@ -566,7 +575,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jtestMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            m.CargarZ();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Double ataque,vida;
         String tipo="";
         ataque = Double.parseDouble(jzataque.getText());
@@ -576,7 +590,7 @@ public class Main extends javax.swing.JFrame {
         }
         else if(jztipo2.isSelected()){
             tipo  = "Cargado";
-;        }
+       }
         if (tipo.equalsIgnoreCase("Clasico")) {
             int ex = Integer.parseInt(jzexp.getText());
             zombies.add(new clasico(ex,new bandera(jzcolor.getText(),jzdirec.getText()),jznombre.getText(),ataque,vida));
@@ -587,7 +601,11 @@ public class Main extends javax.swing.JFrame {
             int nivel = Integer.parseInt(jzenojo.getText());
             zombies.add(new cargado(tam,nivel,edad,jznombre.getText(),ataque,vida));
         }
-        
+        try {
+            m.CargarZ();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -650,7 +668,11 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                try {
+                    new Main().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -670,12 +692,15 @@ public class Main extends javax.swing.JFrame {
          defensa.add(alto);
         defensa.add(bajo);
         defensa.add(medio);
-        explosion.add(alto);
-        explosion.add(bajo);
-        explosion.add(medio);
-        disparo.add(alto);
-        disparo.add(bajo);
-        disparo.add(medio);
+         
+        Zombies.add(clasico);
+        Zombies.add(cargado);
+        explosion.add(new DefaultMutableTreeNode("Alto"));
+        explosion.add(new DefaultMutableTreeNode("Medio"));
+        explosion.add(new DefaultMutableTreeNode("Bajo"));
+        disparo.add(new DefaultMutableTreeNode("Alto"));
+        disparo.add(new DefaultMutableTreeNode("Medio"));
+        disparo.add(new DefaultMutableTreeNode("Bajo"));
         for (int i = 0; i < plantas.size(); i++) {
             if (plantas.get(i) instanceof disparo) {
                 if (((disparo)plantas.get(i)).getRango().equalsIgnoreCase("alto")) {
@@ -696,39 +721,41 @@ public class Main extends javax.swing.JFrame {
             else if(plantas.get(i) instanceof explosiva){
             if (((explosiva)plantas.get(i)).getRango().equalsIgnoreCase("alto")) {
                 String temp2 = ((explosiva)plantas.get(i)).toString();
-                alto.add(new DefaultMutableTreeNode(temp2));
+                ((DefaultMutableTreeNode)explosion.getChildAt(0)).add(new DefaultMutableTreeNode(temp2));
             }
             if (((explosiva)plantas.get(i)).getRango().equalsIgnoreCase("medio")) {
                 String temp2 = ((explosiva)plantas.get(i)).toString();
-                medio.add(new DefaultMutableTreeNode(temp2));
+                ((DefaultMutableTreeNode)explosion.getChildAt(1)).add(new DefaultMutableTreeNode(temp2));
             }
             
             if (((explosiva)plantas.get(i)).getRango().equalsIgnoreCase("bajo")) {
                 String temp2 = ((explosiva)plantas.get(i)).toString();
-                  bajo.add(new DefaultMutableTreeNode(temp2));
+                  ((DefaultMutableTreeNode)explosion.getChildAt(2)).add(new DefaultMutableTreeNode(temp2));
             }
             }
             else if(plantas.get(i) instanceof Defensa){
                 if (((Defensa)plantas.get(i)).getRango().equalsIgnoreCase("alto")) {
                 String temp3 = ((Defensa)plantas.get(i)).toString();
-                 alto.add(new DefaultMutableTreeNode(temp3));
+                 ((DefaultMutableTreeNode)defensa.getChildAt(0)).add(new DefaultMutableTreeNode(temp3));
                 }
                 if (((Defensa)plantas.get(i)).getRango().equalsIgnoreCase("medio")) {
                 String temp3 = ((Defensa)plantas.get(i)).toString();
-                 medio.add(new DefaultMutableTreeNode(temp3));
+                 ((DefaultMutableTreeNode)defensa.getChildAt(1)).add(new DefaultMutableTreeNode(temp3));
                 }
                 if (((Defensa)plantas.get(i)).getRango().equalsIgnoreCase("bajo")) {
                 String temp3 = ((Defensa)plantas.get(i)).toString();
-                 bajo.add(new DefaultMutableTreeNode(temp3));
+                ((DefaultMutableTreeNode)defensa.getChildAt(2)).add(new DefaultMutableTreeNode(temp3));
                 }
             }
         }
         for (int j = 0; j < zombies.size(); j++) {
             if (zombies.get(j) instanceof cargado) {
                 String temp4 = ((cargado)zombies.get(j)).toString();
+                cargado.add(new DefaultMutableTreeNode(temp4));
             }
             else if (zombies.get(j) instanceof clasico) {
                 String temp4 = ((clasico)zombies.get(j)).toString();
+                clasico.add(new DefaultMutableTreeNode(temp4));
             }
         }
        
@@ -736,9 +763,7 @@ public class Main extends javax.swing.JFrame {
         Plantas.add(defensa);
         Plantas.add(disparo);
         Plantas.add(explosion);
-        
-        Zombies.add(clasico);
-        Zombies.add(cargado);
+       
         Entidad.add(Plantas);
         Entidad.add(Zombies);
         modelo.reload();
@@ -749,6 +774,7 @@ public class Main extends javax.swing.JFrame {
     Plantas planta_s;
     Zombies zombies_s;
     DefaultMutableTreeNode nodo_seleccionado;
+    metodos m = new metodos();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Elegir;
     private javax.swing.JMenuItem Eliminar;

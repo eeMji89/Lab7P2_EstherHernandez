@@ -48,7 +48,7 @@ public class metodos {
         this.zombies = zombies;
     }
     
-    public void EscribirA ()throws IOException {
+    public void EscribirAP ()throws IOException {
         FileWriter fw = null;
         BufferedWriter bw = null;
         try {
@@ -67,13 +67,27 @@ public class metodos {
                     bw.write(tipo+": ("+((explosiva)p).getMagnitud()+")_");
                 }
                 bw.write("Rango="+p.getRango()+","+"Nombre =" +p.getNombre()+","+"Ataque="+ p.getAtaque()+",Vida="+p.getVida());
-                
+                bw.write("\\|");
             }
-        } catch (Exception e) {
-            
-        }
+        bw.flush();
+      } catch (Exception ex) {
+       }
+        bw.close();
+        fw.close();
         
 
+    }
+    public void EscribirAZ (){
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            fw = new FileWriter("./Zombies_.txt", false);
+            bw = new BufferedWriter(fw);
+            String tipo= "";
+        
+            
+        } catch (Exception e) {
+        }
     }
     private String leer(String ruta) throws FileNotFoundException, IOException{
        return new BufferedReader(new FileReader (ruta)).readLine();
@@ -88,7 +102,9 @@ public class metodos {
                 String p = leer("./Plantas.txt");
                 Plantas pt;
                 double ataque=0,vida = 0;
-                String tipop = "";String nombrept="";String rangot="";
+                int ex =0;int altura =0,nivel = 0,peso = 0;
+                String tipop = "";String nombrept="";String rangot="";String pro ="";
+                 String color="";
                 String[] temp = p.split("\\|");
                 for (int i = 0; i < temp.length; i++) {
                     String t= temp [i];
@@ -100,9 +116,9 @@ public class metodos {
                             if (temp3[0].contains(":")) {
                                String[]x1 =  temp3[0].split(":");
                                tipop = x1[0];
+                               
                             }
-                            else if(temp3[1].contains(":")){
-                                
+                            else if(temp3[1].contains(":")){   
                             }
                         }
                         else{
@@ -111,11 +127,10 @@ public class metodos {
                                 nombrept= temp4[1];
                             }
                             else if (temp4[0].equalsIgnoreCase("Ataque")){
-                                  
+                                  ataque = Double.parseDouble(temp4[1]);
                             }
                              else if (temp4[0].equalsIgnoreCase("Vida")){
-                                
-                                
+                                 vida = Double.parseDouble(temp4[1]);   
                             }
                              else if (temp4[0].equalsIgnoreCase("Rango")){
                                 rangot= temp[1];
@@ -126,27 +141,26 @@ public class metodos {
    
                     }
                     if (tipop.equalsIgnoreCase("disparo")) {
-                        plantas.add(new disparo());
+                        plantas.add(new disparo(pro,color,rangot,nombrept,ataque,vida));
                     }
                     else  if (tipop.equalsIgnoreCase("defensa")) {
-                        plantas.add(new Defensa());
+                        plantas.add(new Defensa(altura,nivel,peso,rangot,nombrept,ataque,vida));
+                    }
+                    else  if (tipop.equalsIgnoreCase("explosiva")) {
+                        plantas.add(new explosiva(ex,rangot,nombrept,ataque,vida));
                     }
                     
                 }
-            
-               /* sc1 = new Scanner(p); 
-               sc2 = new Scanner(z); 
-               while (sc1.hasNext()){
-                   sc1.useDelimiter("|");
-                   sc2.useDelimiter(":");
-                   String temp = sc1.next();
-               }*/
+            sc1.close();
+              sc2.close();
             }
             catch(Exception e){
                 
             }
+            
         } 
     }
+    
     public void CargarZ() throws IOException{
         archivo = new File("./Zombies_.txt" );
         String z = leer("./Zombies_.txt");
